@@ -1,0 +1,27 @@
+{
+  "name": "c.imagecaptcha",
+  "version": "1.2.1",
+  "description": "",
+  "main": "cdotcaptcha.js",
+  "scripts": {
+    "test": "nodemon devtools/test.server.js",
+    "setup": "nodemon devtools/setup.server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JanaCoulomb/c.capcha.git"
+  },
+  "author": "jana c.",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.1.3",
+    "express": "^4.18.2",
+    "express-session": "^1.18.0",
+    "fs": "^0.0.1-security",
+    "jsonfile": "^6.1.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}

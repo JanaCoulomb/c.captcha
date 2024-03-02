@@ -1,0 +1,205 @@
+<div class="holder">
+   
+    <div class="image"><img src="" alt="" id="preview"><div id="selectors">
+    </div></div>
+    <input id = "filetag" type="file"/>
+    <br>
+    <label for="text">Question to ask:</label>
+    <input id="text" type="text" value="text"/>
+    <input type="submit" value="Add" id="submit"/>
+       
+</div>
+
+<script>
+
+    var fileTag = document.getElementById("filetag"),
+    preview = document.getElementById("preview"),
+    submit = document.getElementById("submit"),
+    text = document.getElementById("text"),
+    selectors = document.getElementById("selectors");
+
+    text.value = "";
+    fileTag.value = "";
+
+    var array = [];
+    for (let index = 0; index < 9; index++) {
+        const div = document.createElement("button");
+        selectors.appendChild(div);
+        div.classList.add("item");
+        div.addEventListener("click",(e) => {
+            div.classList.toggle("selected");
+        });
+        array.push(div);
+    }
+
+    //src from here: https://stackoverflow.com/questions/18650168/convert-blob-to-base64
+    var blobToBase64 = function(blob, callback) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var dataUrl = reader.result;
+            var base64 = dataUrl.split(',')[1];
+            callback(base64);
+        };
+        reader.readAsDataURL(blob);
+    };
+
+    //modifie src from here: https://img.ly/blog/how-to-compress-an-image-before-uploading-it-in-javascript/
+    function compressImage(data,size,res) {
+        // showing the compressed image
+        const imgToCompress = new Image();
+
+      
+        imgToCompress.onload = () => {
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
+
+            const originalWidth = imgToCompress.width;
+            const originalHeight = imgToCompress.height;
+
+            const ratio = originalWidth / originalHeight;
+
+            
+            console.log(originalWidth + " "+ originalHeight);
+
+            
+            const drawWidth = (ratio > 1) ? size * ratio : size;
+            const drawHeight = (ratio < 1) ? size / ratio : size;
+
+            console.log(drawWidth);
+            console.log(drawHeight);
+
+            canvas.width = size;
+            canvas.height = size;
+
+            context.drawImage(
+                imgToCompress,
+                0,
+                0,
+                drawWidth,
+                drawHeight
+            );
+
+
+    
+            canvas.toBlob(
+                (blob) => {
+                if (blob) {
+                    
+                
+                    blobToBase64(blob,(base) => {
+                        res.setAttribute('src', "data:image/jpeg;base64,"+base);
+                    })
+            
+                }
+                },
+                "image/jpeg",
+                10
+            );
+        };
+
+        imgToCompress.setAttribute('src', data);
+
+    }
+
+
+    fileTag.addEventListener("change", function() {
+        changeImage(this);
+    });
+
+    function changeImage(input) {
+        var reader;
+
+        if (input.files && input.files[0]) {
+            reader = new FileReader();
+
+            reader.onload = function(e) {
+            
+          
+                compressImage(e.target.result,200,preview);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }        
+    }
+
+    submit.addEventListener("click", function(){
+        var jsonobj = {};
+
+        jsonobj["imagedata"] = preview.src;
+        jsonobj["answer"] = [];
+
+        array.forEach(element => {
+            jsonobj["answer"].push(element.classList.contains("selected"));
+        });
+
+        jsonobj["question"] = text.value;
+
+        fetch('upload', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonobj) })
+                .then(response => response.json())
+                .then(response => {
+                    console.log(response);
+                    location.reload(); 
+                })
+
+    });
+
+
+</script>
+
+<style>
+    .holder {
+        width: 100%;
+        max-width: 500px;
+    }
+    .image {
+        width: 500px;
+        height: 500px;
+
+        position: relative;
+    }
+
+    .image > img {
+        width: 100%;
+        height: 100%;
+
+        position: absolute;
+    }
+    input {
+        width: 100%;    
+    }
+
+    .image >  #selectors {
+        width: 100%;
+        height: 100%;
+        display: inline-grid;
+        grid-template-columns: auto auto auto;
+        gap: 4px;
+        padding: 4px;
+        box-sizing: border-box;
+        position: absolute;
+    }
+    .image > #selectors > .item {
+        border: solid 1px rgba(73, 73, 73, 0.281) ;
+        background-color: rgba(78, 83, 88, 0.089);
+        transition: all 0.61ms;
+    }
+
+    .image >  #selectors > .selected {
+   
+        background-color: rgba(21, 247, 0, 0.349);
+    }
+    .image > #selectors > .item:hover {
+        background-color: rgba(206, 206, 206, 0.61);
+
+    }
+    .image >  #selectors > .selected:hover {
+   
+        background-color: rgba(54, 201, 9, 0.637);
+    }
+</style>

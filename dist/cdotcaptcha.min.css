@@ -1,0 +1,488 @@
+
+@font-face {
+	font-family: JosefinSans;
+	src: url(fonts/JosefinSans-Light.ttf);
+	font-style: normal;
+	font-weight: light;
+}
+@font-face {
+	font-family: JosefinSans;
+	src: url(fonts/JosefinSans-Regular.ttf);
+	font-style: normal;
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: JosefinSans;
+	src: url(fonts/JosefinSans-Bold.ttf);
+	font-style: normal;
+	font-weight: bold;
+}
+
+:root {
+
+    --cicbackgroundcolor: #fff;
+    --cicdarkcolor: #0C1B33;
+    --cicmediumcolor: #93827F;
+    --ciclightcolor: #E0D2C3;
+    --cicaccent1color: #15F5BA;
+    --cicaccent2color: #7A306C;
+    --font: JosefinSans;
+  
+}
+
+.cdotcapchacontainer *,.cdotcapchachallengediv * {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+.cdotcapchacontainer {
+
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 0;
+
+    width: 100%;
+    height: 100%;
+
+    min-width: 250px;
+    max-width: 500px;
+    min-height: 40px;
+    max-height: 50px;
+
+    border-radius: 4px;
+    background-color:var(--cicbackgroundcolor);
+
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+    vertical-align: middle;
+
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.15)!important;
+}
+.cdotcapchacontainer .approve {
+
+
+    display: inline;
+
+    margin: 0px;
+    height: 25px;
+    width: auto;
+
+    display:flex;
+	justify-content:left;
+	align-items:center;
+    vertical-align: middle;
+}
+
+.cdotcapchacontainer .approve .robottext {
+
+    color: var(--cicdarkcolor);
+    display: inline;
+    margin: 0px;
+    padding: 6px;
+    height: 25px;
+    
+    width: auto;
+    font-family: var(--font);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.cdotcapchacontainer .info {
+    display: inline;
+    margin: 0px;
+    height: 25px;
+    width: 70px;
+}
+
+.cdotcapchacontainer .info a {
+
+    margin: 0px;
+    padding: 0px;
+    font-family: var(--font);
+    font-size: 13px;
+    line-height: 13px;
+
+    font-weight: light;
+    color: var(--cicaccent2color);
+    text-decoration: none;
+
+}
+
+.cdotcapchacontainer .checkbox {
+    height: 25px;
+    width: 25px;
+
+    display: inline;
+    position: relative;
+}
+
+.cdotcapchacontainer .checkbox > * {
+    box-sizing: border-box;
+
+    height: 100%;
+    width: 100%;
+
+    position: absolute;
+}
+.cdotcapchacontainer .checkbox .input {
+
+    transition: all 0.4s,border-radius 0.1s,rotation 0.1s;
+}
+
+
+.cdotcapchacontainer .checkbox .input {
+
+    display: block;
+
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.15)!important;
+    background-color: var(--cicbackgroundcolor);
+    border: solid 2px var(--cicmediumcolor);
+
+    border-radius: 2px;
+}
+.cdotcapchacontainer .checkbox .input:hover {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.363)!important;
+    opacity: 0.4;
+}
+.cdotcapchacontainer .checkbox.approved .input,.cdotcapchacontainer .checkbox.checking .input {
+    opacity: 0;
+    border-width: 0;
+    transition: all 0.8s,border-width 0.6s;
+}
+.cdotcapchacontainer .checkbox .loader {
+    border: 0px solid var(--cicmediumcolor);
+    border-bottom-color: var(--cicaccent2color);
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.15)!important;
+
+    transition: all 0.8s,border-width 0.6s;
+}
+
+.cdotcapchacontainer .checkbox.checking .loader {
+ 
+    border-width: 3px;
+    
+    opacity: 1;
+    
+    animation: rotation11 1s linear infinite 0.3s;
+
+ 
+    transition: all 0.2s 0.4s,border-width 0.2s 0.6s;
+}
+
+@keyframes rotation11 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+} 
+
+
+.cdotcapchacontainer .checkbox.approved .checkmark {
+
+    display: block;
+ 
+}
+
+.cdotcapchacontainer .checkbox .checkmark div {
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.15)!important;
+    background-color: var(--cicaccent1color);
+    display: block;
+    position: relative;
+
+    width: 0px;
+    height: 0px;
+
+    
+}
+.cdotcapchacontainer .checkbox .checkmark .c0 {
+
+    top: 2px;
+    left: 23px;
+
+    transform: rotate(45deg);
+}
+.cdotcapchacontainer .checkbox .checkmark .c1 {
+
+    width: 3px;
+    transition: all 0.4s 0.6s;
+
+}
+.cdotcapchacontainer .checkbox .checkmark .c2 {
+
+    top: calc(100% - 3px);
+    left: 0;
+    height: 3px;
+    transition: all 0.4s 1s;
+
+}
+.cdotcapchacontainer .checkbox.approved .checkmark .c1 {
+
+ 
+
+    
+    height: 25px;
+  
+
+  
+}
+.cdotcapchacontainer .checkbox.approved .checkmark .c2 {
+ 
+    left: -9px;
+
+    width: 12px;
+ 
+
+
+}
+
+
+
+
+
+
+.cdotcapchachallengediv {
+ 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    background-color: rgba(var(--ciclightcolor),200);
+
+    overflow-y:scroll;
+
+    display: none;
+
+
+}
+.cdotcapchachallengediv.enable {
+  
+    animation: slidein 0.3s ease-in-out forwards;
+
+    display: flex;
+
+    justify-content:center;
+
+    align-items: center;
+    vertical-align: middle;
+}
+
+@keyframes slidein {
+    0% {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+    100% {
+        
+        opacity: 1;
+        backdrop-filter: blur(6px);
+    }
+}
+
+.cdotcapchachallengediv > div {
+    display: block;
+    box-sizing: border-box;
+
+
+    padding: 5px;
+
+    width: calc(100% - 10px);
+    border-radius: 4px;
+   
+    align-self: center;
+    background-color: var(--cicbackgroundcolor);
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.15)!important;
+    max-width: 400px;
+
+    position: relative;
+
+}
+
+
+
+.cdotcapchachallengediv > div > .squareholder {
+
+    width: calc(100vw - 10px - 10px);
+    height: calc(100vw - 10px - 10px);
+    max-height: calc(400px  - 10px);
+    max-width: calc(400px  - 10px);
+
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.14)!important;
+
+
+    box-sizing: border-box;
+  
+
+    position: relative;
+}
+
+.cdotcapchachallengediv > div > .squareholder > .loaddivdiv {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    position: absolute;
+
+    display: flex;
+    justify-content:center;
+
+    align-items: center;
+    vertical-align: middle;
+
+    opacity: 0;
+    transition: all 1s;
+}
+
+/* credit for loader ;) https://loading.io/css/ */
+.cdotcapchachallengediv > div > .squareholder > .loaddivdiv > div {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .cdotcapchachallengediv > div > .squareholder > .loaddivdiv > div div {
+    display: inline-block;
+    position: absolute;
+    left: 8px;
+    width: 16px;
+    background: var(--cicmediumcolor);
+
+
+    animation: threebarloader 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  }
+  .cdotcapchachallengediv > div > .squareholder > .loaddivdiv > div div:nth-child(1) {
+    left: 8px;
+    animation-delay: -0.24s;
+  }
+  .cdotcapchachallengediv > div > .squareholder > .loaddivdiv > div div:nth-child(2) {
+    left: 32px;
+    animation-delay: -0.12s;
+  }
+  .cdotcapchachallengediv > div > .squareholder > .loaddivdiv > div div:nth-child(3) {
+    left: 56px;
+    animation-delay: 0;
+  }
+  @keyframes threebarloader {
+    0% {
+      top: 8px;
+      height: 64px;
+    }
+    50%, 100% {
+      top: 24px;
+      height: 32px;
+    }
+  }
+
+.cdotcapchachallengediv > div > .squareholder > .imgdiv {
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    transition: all 1s;
+    position: absolute;
+
+    overflow: hidden;
+
+}
+.cdotcapchachallengediv > div > .squareholder > .enabled {
+    opacity: 1;
+}
+.cdotcapchachallengediv > div > .squareholder > .imgdiv img {
+    width: 100%;
+    height: 100%;
+    filter: blur(3px);
+    position: absolute;
+}
+
+.cdotcapchachallengediv > div > .squareholder > .imgdiv > .selectors {
+    width: 100%;
+    height: 100%;
+    display: inline-grid;
+    grid-template-columns: auto auto auto;
+
+ 
+    box-sizing: border-box;
+    position: absolute;
+}
+.cdotcapchachallengediv > div > .squareholder > .imgdiv > .selectors > .item {
+    border: solid 2px rgba(255, 255, 255, 0.479) ;
+
+ 
+    background-color: rgba(209, 209, 209, 0.192);
+    transition: all 0.61ms;
+}
+
+.cdotcapchachallengediv > div > .squareholder > .imgdiv > .selectors > .selected {
+    background-color: rgba(31, 31, 31, 0.103);
+    border-color: rgba(53, 53, 53, 0.486) ;
+
+}
+.cdotcapchachallengediv > div > .squareholder > .imgdiv > .selectors > .item:hover {
+    opacity: 0.7;
+
+ 
+}
+
+
+.cdotcapchachallengediv > div > p {
+    font-size: 18px;
+    margin: 3px;
+    margin-top: 10px;
+    padding: 0px;
+
+    color: var(--cicdarkcolor);
+    font-weight: normal;
+    font-family: var(--font);
+}
+
+.cdotcapchachallengediv > div > button {
+    font-size: 16px;
+
+    border-radius: 2px;
+    font-size: 19px;
+  
+
+    box-sizing: border-box;
+
+    margin: 3px;
+    padding: 4px 3px 0px 3px;
+    margin-bottom: 20px;
+    background-color: var(--cicaccent1color);
+   
+    border: none;
+    display: inline-block;
+
+    transition: all 0.2s;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.14)!important;
+
+    color:  var(--cicdarkcolor);
+
+    font-weight: normal;
+    font-family: var(--font);
+
+
+}
+
+.cdotcapchachallengediv > div > button:last-child {
+
+    background-color: var(--cicaccent2color);
+   
+
+
+    color: var(--ciclightcolor);
+
+
+}
+
+.cdotcapchachallengediv > div > button:hover {
+
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.24)!important;
+    opacity: 0.6;
+
+}
