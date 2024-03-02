@@ -1,29 +1,32 @@
 'use strict'
 
+//intialize some stuff like express and sessions
+
 const express = require('express')
 
 const bodyParser = require('body-parser')
 
 const app = express()
 
-
-
 const fs = require('fs');
 const jsonfile = require('jsonfile')
 
-
 const path = require('path');
+
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(express.json({limit: '50mb'}));
 
 
+// init setpu.html file for client
 
 app.get('/', (req, res) => {
 
     res.sendFile(path.join(__dirname, '/public/setup.html'));
 
 })
+
+// init upload path for images and challange info
 
 app.post('/upload', (req, res) => {
 
@@ -39,6 +42,8 @@ app.post('/upload', (req, res) => {
 
 })
 
+// util function to create dirs that dont exisit
+
 function ensureDirectoryExistence(filePath) {
     var dirname = path.dirname(filePath);
     if (fs.existsSync(dirname)) {
@@ -48,6 +53,7 @@ function ensureDirectoryExistence(filePath) {
     fs.mkdirSync(dirname);
 }
 
+//start server on 3000 port
 
 app.listen(3000, () => {
 

@@ -1,17 +1,14 @@
 'use strict'
 
+//intialize some stuff like express and sessions
 
 const express = require('express')
 const session = require('express-session');
-
-
-
 
 const app = express()
 
 app.use(express.json());
 
-const captcha = require('../cdotcaptcha').create()
 const path = require('path');
 
 app.use(session({
@@ -24,7 +21,18 @@ app.use(session({
 
 }))
 
+// inti captcha
+
+const captcha = require('../cdotcaptcha').create()
+
+
+
+
+// init captcha js and css to use in frontend html
+
 app.use('/c.captcha',express.static('dist'));
+
+/// init html test file
 
 app.get('/', (req, res) => {
 
@@ -32,7 +40,11 @@ app.get('/', (req, res) => {
 
 })
 
+// init challange url for captcha backend
+
 app.post('/captcha/challenge',captcha.challenge)
+
+//test your cptcha status
 
 app.get('/checkverified', (req, res) => {
 
@@ -42,6 +54,7 @@ app.get('/checkverified', (req, res) => {
 
 })
 
+// run server
 
 app.listen(80, () => {
 
